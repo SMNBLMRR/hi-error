@@ -1,7 +1,7 @@
 {
-  "name": "custom-http-error-handler",
-  "version": "1.0.1",
-  "description": "",
+  "name": "he",
+  "version": "1.0.2",
+  "description": "Custom Http Error handler",
   "main": "index.js",
   "scripts": {
     "test": "tap"
