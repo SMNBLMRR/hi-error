@@ -1,6 +1,6 @@
 {
-  "name": "he",
-  "version": "1.0.2",
+  "name": "hi-error",
+  "version": "1.0.3",
   "description": "Custom Http Error handler",
   "main": "index.js",
   "scripts": {

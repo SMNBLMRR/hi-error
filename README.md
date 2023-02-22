@@ -3,18 +3,18 @@
 # Example without using JSON
 
 ```javascript
-const he = require("he");
-he.CreateError(400,"BAD REQUEST")
+const hi = require("hi-error");
+hi.CreateError(400,"BAD REQUEST")
 ```
 
 # Example using JSON
 
 ```javascript
-const he = require("he")({
+const hi = require("hi-error")({
   path:["folder","file.json"]
 });
 
-he.BAD_REQUEST
+hi.BAD_REQUEST
 ```
 in this example you can pass the path parameter inside the options, which can be a folder or a single file
 
