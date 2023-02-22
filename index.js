@@ -36,21 +36,23 @@ function CreateError(status, message) {
 }
 
 function CustomHttpError(opt) {
-  const { isValid, json } = isValidOptions(opt);
-  const parseJson = JSON.parse(json);
-  const validate = ajv.compile(schema);
-  const isCorrectSchema = validate(parseJson);
-  if (!isCorrectSchema) {
-    Exception("Invalid Schema");
+  const { json } = isValidOptions(opt);
+  if (typeof opt === "object") {
+    const parseJson = JSON.parse(json);
+    const validate = ajv.compile(schema);
+    const isCorrectSchema = validate(parseJson);
+    if (!isCorrectSchema) {
+      Exception("Invalid Schema");
+    }
   }
   const httpErrorObject = {};
-  if (isValid && isCorrectSchema) {
-    httpErrorObject["CreateError"] = CreateError;
+  httpErrorObject["CreateError"] = CreateError;
+  if (parseJson) {
     for (const ele of parseJson) {
       httpErrorObject[ele.tag] = CreateError(ele.error.code, ele.error.message);
     }
-    return httpErrorObject;
   }
+  return httpErrorObject;
 }
 
 module.exports = CustomHttpError;

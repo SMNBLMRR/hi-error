@@ -8,7 +8,7 @@ npm i hi-error
 # Example without using JSON
 
 ```javascript
-const hi = require("hi-error");
+const hi = require("hi-error")();
 
 //example using fastify
 app.get("/api/v1/h1", async (req,res) => {
