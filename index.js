@@ -1,7 +1,7 @@
 "use strict";
 const Ajv = require("ajv");
 const ajv = new Ajv({ allErrors: true });
-const { isValidOptions, Exception } = require("./lib/validOptions");
+const { isValidOptions, Exception, is } = require("./lib/validOptions");
 
 const schema = {
   type: "array",
@@ -37,8 +37,9 @@ function CreateError(status, message) {
 
 function CustomHttpError(opt) {
   const { json } = isValidOptions(opt);
-  if (typeof opt === "object") {
-    const parseJson = JSON.parse(json);
+  let parseJson = null;
+  if (is.object(opt)) {
+    parseJson = JSON.parse(json);
     const validate = ajv.compile(schema);
     const isCorrectSchema = validate(parseJson);
     if (!isCorrectSchema) {
