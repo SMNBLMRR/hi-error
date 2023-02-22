@@ -4,14 +4,14 @@
 
 ```javascript
 const he = require("he");
-he.CreateError(400,"BAD REQUEST)
+he.CreateError(400,"BAD REQUEST")
 ```
 
 # Example using JSON
 
 ```javascript
 const he = require("he")({
-path:["folder","file.json"]
+  path:["folder","file.json"]
 });
 
 he.BAD_REQUEST
