@@ -1,15 +1,13 @@
 # custom-http-error-handler
 ###### Tiny library for handling http client/server errors 
-
-
-#Example without using JSON
+# Example without using JSON
 
 ```javascript
 const he = require("he");
 he.CreateError(400,"BAD REQUEST)
 ```
 
-#Example using JSON
+# Example using JSON
 
 ```javascript
 const he = require("he")({
@@ -20,7 +18,7 @@ he.BAD_REQUEST
 ```
 in this example you can pass the path parameter inside the options, which can be a folder or a single file
 
-** this is what your json schema should look like **
+**this is what your json schema should look like**
 
 ```json
 [
