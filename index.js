@@ -32,7 +32,7 @@ class CustomException extends Error {
 }
 
 function CreateError(status, message) {
-  if (!(this instanceof CustomException)) return new CustomException(status, message);
+    if (!(is.validCode(status) && this instanceof CustomException)) return new CustomException(status, message)
 }
 
 function CustomHttpError(opt) {
@@ -50,7 +50,9 @@ function CustomHttpError(opt) {
   httpErrorObject["CreateError"] = CreateError;
   if (parseJson) {
     for (const ele of parseJson) {
-      httpErrorObject[ele.tag] = CreateError(ele.error.code, ele.error.message);
+      if(is.validCode(ele.error.code)){
+        httpErrorObject[ele.tag] = CreateError(ele.error.code, ele.error.message);
+      }
     }
   }
   return httpErrorObject;
