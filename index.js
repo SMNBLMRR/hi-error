@@ -32,7 +32,7 @@ class CustomException extends Error {
 }
 
 function CreateError(status, message) {
-    if (!(is.validCode(status) && this instanceof CustomException)) return new CustomException(status, message)
+    if (!(is.validCode(status) && this instanceof CustomException)) throw new CustomException(status, message)
 }
 
 function CustomHttpError(opt) {

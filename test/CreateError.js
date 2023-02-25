@@ -10,13 +10,22 @@ tap.test('should throw an error', (t) => {
   });
 });
 
-tap.test('should throw an error', (t) => {
+
+tap.test('should throw an error with custom message', (t) => {
     t.plan(1);
     t.throws(() => {
       hi.CreateError(400,"Exception");
     }, {
       message: 'Exception'
     });
-});
-
-
+  });
+  
+  tap.test('default status code with message', (t) => {
+    t.plan(1);
+    t.throws(() => {
+      hi.CreateError("Exception");
+    }, {
+      message: 'Exception'
+    });
+  });
+  
