@@ -1,25 +1,26 @@
-"use strict";
-const Ajv = require("ajv");
+const Ajv = require('ajv');
+
 const ajv = new Ajv({ allErrors: true });
-const { isValidOptions, Exception, is } = require("./lib/validOptions");
+
+const { isValidOptions, Exception, is } = require('./lib/validOptions');
 
 const schema = {
-  type: "array",
+  type: 'array',
   items: {
-    type: "object",
+    type: 'object',
     properties: {
-      tag: { type: "string" },
+      tag: { type: 'string' },
       error: {
-        type: "object",
+        type: 'object',
         properties: {
-          code: { type: "integer" },
-          message: { type: "string" },
+          code: { type: 'integer' },
+          message: { type: 'string' },
         },
-        required: ["code", "message"],
+        required: ['code', 'message'],
         additionalProperties: false,
       },
     },
-    required: ["tag", "error"],
+    required: ['tag', 'error'],
     additionalProperties: false,
   },
 };
@@ -32,7 +33,9 @@ class CustomException extends Error {
 }
 
 function CreateError(status, message) {
-    if (!(is.validCode(status) && this instanceof CustomException)) throw new CustomException(status, message)
+  if (!(is.validCode(status) && this instanceof CustomException)) {
+    throw new CustomException(status, message);
+  }
 }
 
 function CustomHttpError(opt) {
@@ -43,14 +46,15 @@ function CustomHttpError(opt) {
     const validate = ajv.compile(schema);
     const isCorrectSchema = validate(parseJson);
     if (!isCorrectSchema) {
-      Exception("Invalid Schema");
+      Exception('Invalid Schema');
     }
   }
   const httpErrorObject = {};
-  httpErrorObject["CreateError"] = CreateError;
+  httpErrorObject.CreateError = CreateError;
   if (parseJson) {
+    // eslint-disable-next-line no-restricted-syntax
     for (const ele of parseJson) {
-      if(is.validCode(ele.error.code)){
+      if (is.validCode(ele.error.code)) {
         httpErrorObject[ele.tag] = CreateError(ele.error.code, ele.error.message);
       }
     }
